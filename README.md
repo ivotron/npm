@@ -51,7 +51,7 @@ action "Publish" {
   env = {
     NPM_REGISTRY_URL = "someOtherRegistry.someDomain.net"
   }
-  secrets = ["NPM_TOKEN"]
+  secrets = ["NPM_AUTH_TOKEN"]
 }
 ```
 
