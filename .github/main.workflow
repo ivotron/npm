@@ -13,13 +13,18 @@ action "Test" {
   args = "test/*.bats"
 }
 
+action "Integration Test" {
+  uses = "./"
+  args = "version"
+}
+
 action "Docker Lint" {
   uses = "docker://replicated/dockerfilelint"
   args = ["Dockerfile"]
 }
 
 action "Build" {
-  needs = ["Shell Lint", "Test", "Docker Lint"]
+  needs = ["Shell Lint", "Test", "Integration Test", "Docker Lint"]
   uses = "actions/docker/cli@master"
   args = "build -t npm ."
 }
