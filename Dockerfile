@@ -1,6 +1,6 @@
-FROM node:10-slim
+FROM node:10
 
-LABEL version="1.0.0"
+LABEL version="2.0.0"
 LABEL repository="http://github.com/actions/npm"
 LABEL homepage="http://github.com/actions/npm"
 LABEL maintainer="GitHub Actions <support+actions@github.com>"
