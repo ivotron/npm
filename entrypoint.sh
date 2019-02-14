@@ -10,7 +10,7 @@ if [ -n "$NPM_AUTH_TOKEN" ]; then
   NPM_REGISTRY_SCHEME="https"
   if ! $NPM_STRICT_SSL
   then
-	NPM_REGISTRY_SCHEME="http"
+    NPM_REGISTRY_SCHEME="http"
   fi
 
   # Allow registry.npmjs.org to be overridden with an environment variable
