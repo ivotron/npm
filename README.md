@@ -1,82 +1,9 @@
-# GitHub Action for NPM
+# Important
 
-This Action for [npm](https://www.npmjs.com/) enables arbitrary actions with the `npm` command-line client, including testing packages and publishing to a registry.
+This action is deprecated in favor of using the [`run`](https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsrun) script step in the new YAML language to run the various cli tools represented by these actions. 
 
-## Usage
+For feature requests and feedback please head over to the community forum. https://github.community/t5/GitHub-Actions/bd-p/actions
 
-An example workflow to build, test, and publish an npm package to the default public registry follows:
-
-```hcl
-workflow "Build, Test, and Publish" {
-  on = "push"
-  resolves = ["Publish"]
-}
-
-action "Build" {
-  uses = "actions/npm@master"
-  args = "install"
-}
-
-action "Test" {
-  needs = "Build"
-  uses = "actions/npm@master"
-  args = "test"
-}
-
-# Filter for a new tag
-action "Tag" {
-  needs = "Test"
-  uses = "actions/bin/filter@master"
-  args = "tag"
-}
-
-action "Publish" {
-  needs = "Tag"
-  uses = "actions/npm@master"
-  args = "publish --access public"
-  secrets = ["NPM_AUTH_TOKEN"]
-}
-```
-
-### Secrets
-
-* `NPM_AUTH_TOKEN` - **Optional**. The token to use for authentication with the npm registry. Required for `npm publish` ([more info](https://docs.npmjs.com/getting-started/working_with_tokens))
-
-### Environment variables
-
-* `NPM_REGISTRY_URL` - **Optional**. To specify a registry to authenticate with. Defaults to `registry.npmjs.org`
-* `NPM_STRICT_SSL` - **Optional**. Specify false if your registry is insecure and uses the `http` protocol. Defaults to `true`
-* `NPM_CONFIG_USERCONFIG` - **Optional**. To specify a non-default per-user configuration file. Defaults to `$HOME/.npmrc` ([more info](https://docs.npmjs.com/misc/config#npmrc-files))
-
-#### Example
-
-To authenticate with, and publish to, a secure registry other than `registry.npmjs.org`:
-
-```hcl
-action "Publish" {
-  uses = "actions/npm@master"
-  args = "publish --access public"
-  env = {
-    NPM_REGISTRY_URL = "someOtherRegistry.someDomain.net"
-  }
-  secrets = ["NPM_AUTH_TOKEN"]
-}
-```
-
-
-To authenticate with, and publish to, an insecure registry other than `registry.npmjs.org`:
-
-```hcl
-action "Publish" {
-  uses = "actions/npm@master"
-  args = "publish --access public"
-  env = {
-    NPM_REGISTRY_URL = "my.local.registry"
-    NPM_STRICT_SSL = "false"
-  }
-  secrets = ["NPM_AUTH_TOKEN"]
-}
-```
 ## License
 
 The Dockerfile and associated scripts and documentation in this project are released under the [MIT License](LICENSE).
