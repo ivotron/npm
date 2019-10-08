@@ -19,4 +19,6 @@ if [ -n "$NPM_AUTH_TOKEN" ]; then
   chmod 0600 "$NPM_CONFIG_USERCONFIG"
 fi
 
+echo "##[warning] This actions has been deprecated in favor of github.com/actions/setup-node.  This repo has been archived and will be made private on 10/15/2019"
+
 sh -c "npm $*"
